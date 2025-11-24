@@ -99,6 +99,29 @@
             white-space: nowrap;
             border-width: 0;
         }
+        /* Loading spinner animation */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #007B7E;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spin 1s linear infinite; /* Safari */
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .markdown-body ul {
+            list-style-type: disc;
+            padding-left: 1.5em;
+            margin-bottom: 1em;
+        }
+        .markdown-body strong {
+            font-weight: 700;
+            color: #005a5c;
+        }
     </style>
      
     <!-- Schema.org (JSON-LD) para SEO Avançado -->
@@ -157,7 +180,7 @@
                 </nav>
                 <div class="flex items-center space-x-4">
                      <!-- Botão CTA para Desktop -->
-                     <a href="https://wa.me/556132444605?text=Ol%C3%A1!+Gostaria+de+mais+informações+sobre+os+serviços+contábeis+que+vocês+oferecem." target="_blank" rel="noopener noreferrer" class="hidden sm:inline-block bg-accent text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-accent-dark transition-all shadow-sm hover:shadow-md">Falar com Especialista</a>
+                     <a href="https://wa.me/556132444605?text=Ol%C3%A1,+encontrei+vocês+pelo+Site.+Pode+me+ajudar?+" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-block bg-accent text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-accent-dark transition-all shadow-sm hover:shadow-md">Falar com Especialista</a>
                      <!-- Botão Menu Mobile -->
                      <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-slate-600 hover:bg-slate-100 focus:outline-none" aria-label="Abrir menu">
                         <span class="sr-only">Abrir menu de navegação</span>
@@ -173,7 +196,7 @@
             <a href="#services" class="block py-2 text-slate-600 hover:text-accent">Serviços</a>
             <a href="#why-choose" class="block py-2 text-slate-600 hover:text-accent">Porque nós?</a>
             <a href="#faq" class="block py-2 text-slate-600 hover:text-accent">FAQ</a>
-            <a href="https://wa.me/556132444605?text=Ol%C3%A1!+Gostaria+de+mais+informações+sobre+os+serviços+contábeis+que+vocês+oferecem." target="_blank" rel="noopener noreferrer" class="block mt-4 w-full text-center bg-accent text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-accent-dark transition-all">Falar com Especialista</a>
+            <a href="https://wa.me/556132444605?text=Ol%C3%A1,+encontrei+vocês+pelo+Site.+Pode+me+ajudar?+" target="_blank" rel="noopener noreferrer" class="block mt-4 w-full text-center bg-accent text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-accent-dark transition-all">Falar com Especialista</a>
         </div>
     </header>
 
@@ -191,7 +214,7 @@
                         <h1 class="fade-in text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight" style="animation-delay: 0.2s;">Conte conosco para impulsionar o crescimento sustentável de sua empresa</h1>
                         <p class="fade-in text-lg md:text-xl text-slate-200 mb-10" style="animation-delay: 0.4s;">Suporte completo para a jornada empresarial, da abertura à gestão contábil avançada.</p>
                         <div class="fade-in flex flex-col sm:flex-row gap-4 justify-center lg:justify-start" style="animation-delay: 0.6s;">
-                            <a href="https://wa.me/556132444605?text=Ol%C3%A1!+Gostaria+de+mais+informações+sobre+os+serviços+contábeis+que+vocês+oferecem." target="_blank" rel="noopener noreferrer" class="bg-white text-accent font-semibold px-8 py-4 rounded-lg hover:bg-slate-100 transition-all shadow-lg transform hover:-translate-y-1">Agende um diagnóstico</a>
+                            <a href="https://wa.me/556132444605?text=Ol%C3%A1,+encontrei+vocês+pelo+Site.+Pode+me+ajudar?+" target="_blank" rel="noopener noreferrer" class="bg-white text-accent font-semibold px-8 py-4 rounded-lg hover:bg-slate-100 transition-all shadow-lg transform hover:-translate-y-1">Agende um diagnóstico</a>
                             <a href="#services" class="bg-white/20 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/30 transition-all shadow-lg transform hover:-translate-y-1 ring-1 ring-slate-200/50">Nossos Serviços</a>
                         </div>
                         <p class="fade-in flex items-center justify-center lg:justify-start mt-8 text-slate-300 text-lg" style="animation-delay: 0.8s;">
@@ -455,34 +478,111 @@
                     <h2 class="fade-in text-4xl lg:text-5xl font-extrabold text-slate-900">Por que escolher a Premium?</h2>
                     <p class="fade-in mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Combinamos experiência, tecnologia e um atendimento dedicado para ser o parceiro contábil que sua empresa merece.</p>
                 </div>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="fade-in p-6 text-center">
-                        <div class="flex justify-center items-center mb-4">
-                           <i data-lucide="briefcase" class="w-10 h-10 text-accent"></i>
+                
+                <!-- Layout 2 colunas: Texto/Cards na esquerda, Vídeo na direita -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Coluna Esquerda: Cards de Benefícios -->
+                    <div class="grid sm:grid-cols-2 gap-8">
+                        <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all">
+                            <div class="flex justify-center items-center mb-4">
+                               <i data-lucide="briefcase" class="w-10 h-10 text-accent"></i>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2">Equipe Multidisciplinar</h3>
+                            <p class="text-slate-600">Consultores especializados com mais de 24 anos de experiência.</p>
                         </div>
-                        <h3 class="font-bold text-xl mb-2">Equipe Multidisciplinar</h3>
-                        <p class="text-slate-600">Consultores especializados com mais de 24 anos de experiência.</p>
+                        <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all" style="animation-delay: 0.2s;">
+                             <div class="flex justify-center items-center mb-4">
+                               <i data-lucide="smile" class="w-10 h-10 text-accent"></i>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2">Atendimento Personalizado</h3>
+                            <p class="text-slate-600">Foco total nas necessidades e objetivos estratégicos de cada cliente.</p>
+                        </div>
+                        <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all" style="animation-delay: 0.4s;">
+                             <div class="flex justify-center items-center mb-4">
+                               <i data-lucide="cloud" class="w-10 h-10 text-accent"></i>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2">Ambiente Digital</h3>
+                            <p class="text-slate-600">Utilizamos as melhores tecnologias para processos ágeis e 100% seguros.</p>
+                        </div>
+                        <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all" style="animation-delay: 0.6s;">
+                             <div class="flex justify-center items-center mb-4">
+                               <i data-lucide="building" class="w-10 h-10 text-accent"></i>
+                            </div>
+                            <h3 class="font-bold text-xl mb-2">Estrutura Completa</h3>
+                            <p class="text-slate-600">Sede própria e infraestrutura completa para atendimento presencial e online.</p>
+                        </div>
                     </div>
-                    <div class="fade-in p-6 text-center" style="animation-delay: 0.2s;">
-                         <div class="flex justify-center items-center mb-4">
-                           <i data-lucide="smile" class="w-10 h-10 text-accent"></i>
+
+                    <!-- Coluna Direita: Vídeo Vertical -->
+                    <div class="fade-in flex justify-center items-center" style="animation-delay: 0.8s;">
+                        <div class="aspect-[9/16] w-full max-w-sm rounded-2xl shadow-2xl overflow-hidden bg-slate-200">
+                             <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+                                <source src="video2.mp4" type="video/mp4">
+                                Seu navegador não suporta a tag de vídeo.
+                            </video>
                         </div>
-                        <h3 class="font-bold text-xl mb-2">Atendimento Personalizado</h3>
-                        <p class="text-slate-600">Foco total nas necessidades e objetivos estratégicos de cada cliente.</p>
                     </div>
-                    <div class="fade-in p-6 text-center" style="animation-delay: 0.4s;">
-                         <div class="flex justify-center items-center mb-4">
-                           <i data-lucide="cloud" class="w-10 h-10 text-accent"></i>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">Ambiente Digital</h3>
-                        <p class="text-slate-600">Utilizamos as melhores tecnologias para processos ágeis e 100% seguros.</p>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== NEW Gemini AI Consultant Section ========== -->
+        <section id="ai-consultant" class="pt-14 pb-12 lg:pt-24 lg:pb-20 bg-[#F2F9FE]">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center p-3 bg-white rounded-full shadow-sm mb-6">
+                        <span class="text-2xl">✨</span>
                     </div>
-                    <div class="fade-in p-6 text-center" style="animation-delay: 0.6s;">
-                         <div class="flex justify-center items-center mb-4">
-                           <i data-lucide="building" class="w-10 h-10 text-accent"></i>
+                    <h2 class="fade-in text-4xl lg:text-5xl font-extrabold text-slate-900">Consultor Inteligente Premium</h2>
+                    <p class="fade-in mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                        Tire suas dúvidas ou descreva seu desafio contábil. Nossa inteligência artificial, treinada com a expertise da Premium, dará uma orientação inicial.
+                    </p>
+                </div>
+
+                <div class="fade-in bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                    <div class="space-y-4">
+                        <label for="ai-query" class="block text-sm font-medium text-slate-700 mb-1">Como podemos ajudar sua empresa hoje?</label>
+                        <textarea 
+                            id="ai-query" 
+                            rows="4" 
+                            class="w-full p-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent transition-all outline-none resize-none"
+                            placeholder="Ex: Quero abrir uma empresa de TI em Brasília, quais são os primeiros passos? ou Como pagar menos impostos sendo médico?"
+                        ></textarea>
+                        
+                        <button 
+                            id="ai-submit-btn" 
+                            class="w-full bg-accent text-white font-bold py-4 rounded-xl hover:bg-accent-dark transition-all shadow-lg hover:shadow-accent/20 flex items-center justify-center gap-2 group"
+                        >
+                            <span>Obter Orientação</span>
+                            <i data-lucide="sparkles" class="w-5 h-5 group-hover:animate-pulse"></i>
+                        </button>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="ai-loading" class="hidden mt-8 text-center">
+                        <div class="inline-block loader mb-2"></div>
+                        <p class="text-slate-500 text-sm">Analisando sua solicitação...</p>
+                    </div>
+
+                    <!-- Result Area -->
+                    <div id="ai-result" class="hidden mt-8 p-6 bg-slate-50 rounded-xl border border-slate-200 animate-fade-in">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 bg-accent/10 p-2 rounded-lg">
+                                <i data-lucide="bot" class="w-6 h-6 text-accent"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-slate-900 mb-2">Resposta do Consultor Virtual:</h4>
+                                <div id="ai-response-text" class="text-slate-700 leading-relaxed markdown-body"></div>
+                                <div class="mt-4 pt-4 border-t border-slate-200">
+                                    <p class="text-sm text-slate-500 italic">
+                                        *Esta é uma orientação preliminar gerada por IA. Para uma análise completa e segura, 
+                                        <a href="https://wa.me/556132444605?text=Ol%C3%A1,+gostaria+de+continuar+o+atendimento+iniciado+pelo+Consultor+Virtual." target="_blank" class="text-accent font-semibold hover:underline">fale com um de nossos especialistas humanos.</a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="font-bold text-xl mb-2">Estrutura Completa</h3>
-                        <p class="text-slate-600">Sede própria e infraestrutura completa para atendimento presencial e online.</p>
                     </div>
                 </div>
             </div>
@@ -513,7 +613,7 @@
                                 <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
                             </button>
                             <div class="accordion-content">
-                                <p class="px-6 pb-6 text-slate-600">Sim. Atendemos clientes em todo o Brasil com processos digitais e seguros, garantindo agilidade e conveniência para sua empresa, com foco especial em empresas de Brasília e Região.</p>
+                                <p class="px-6 pb-6 text-slate-600">Sim. Atendemos clientes em todo o Brasil através de processos digitais, com foco especial em empresas de Brasília e Região, onde mantemos nossa sede.</p>
                             </div>
                         </div>
                         <!-- FAQ Item 3 -->
@@ -561,7 +661,7 @@
                     <div class="relative z-10 text-center lg:text-left">
                         <h2 class="fade-in text-4xl lg:text-5xl font-extrabold mb-4">Pronto para dar o próximo passo?</h2>
                         <p class="fade-in text-lg text-cyan-100 mb-8">Fale com um de nossos especialistas e descubra como a Premium Contabilidade pode transformar a gestão da sua empresa.</p>
-                        <a href="https://wa.me/556132444605?text=Ol%C3%A1!+Gostaria+de+mais+informações+sobre+os+serviços+contábeis+que+vocês+oferecem." target="_blank" rel="noopener noreferrer" class="fade-in inline-block bg-white text-accent font-bold px-8 py-4 rounded-lg hover:bg-slate-50 transition-all shadow-lg transform hover:-translate-y-1">Fale com a Premium Contabilidade</a>
+                        <a href="https://wa.me/556132444605?text=Ol%C3%A1,+encontrei+vocês+pelo+Site.+Podem+me+ajudar?+" target="_blank" rel="noopener noreferrer" class="fade-in inline-block bg-white text-accent font-bold px-8 py-4 rounded-lg hover:bg-slate-50 transition-all shadow-lg transform hover:-translate-y-1">Fale com a Premium Contabilidade</a>
                     </div>
                     <div class="fade-in relative z-10 flex justify-center">
                         <img loading="lazy" src="close.png" alt="Mockup de um aplicativo de gestão financeira." class="rounded-xl shadow-2xl w-full max-w-sm">
@@ -573,27 +673,27 @@
     </main>
 
     <!-- ========== 8. Footer ========== -->
-    <footer class="bg-[#014849] text-slate-200 pt-6 pb-12">
+    <footer class="bg-[#014849] text-slate-200 py-12">
         <div class="container mx-auto px-6 text-center">
             
             <!-- Linha Adicional Superior -->
-            <div class="pb-6 mb-8 border-b border-slate-600 grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+            <div class="pb-8 mb-8 border-b border-slate-600 flex flex-col sm:flex-row justify-between text-left">
                 <!-- Coluna Esquerda (Endereço) -->
-            <div class="text-center sm:text-left order-last sm:order-none text-sm">
-                <p>SHS - Quadra 6 - Bloco E - Sala 610/612</p>
-                <p>Asa Sul, Brasília - DF</p>
-            </div>
+                <div class="text-center sm:text-left order-last sm:order-none text-sm">
+                    <p>SHS - Quadra 6 - Bloco E - Sala 610/612</p>
+                    <p>Asa Sul, Brasília - DF</p>
+                </div>
                 
                 <!-- Coluna Central (Telefone) -->
-                <div class="text-center order-first sm:order-none">
+                <div class="text-center order-first sm:order-none mb-4 sm:mb-0">
                     <p>Telefone/Whatsapp: (61) 3244-4605</p>
                 </div>
                 
                 <!-- Coluna Direita (Desenvolvido por) -->
-                <div class="flex items-center justify-center sm:justify-end">
+                <div class="flex items-center justify-center sm:justify-end order-1 sm:order-none mb-4 sm:mb-0">
                     <p class="mr-2">Desenvolvido por</p>
                     <a href="https://wa.me/5561991390058?text=Ol%C3%A1,+vi+que+desenvolvem+sites.+Podem+me+ajudar?+" target="_blank" rel="noopener noreferrer" aria-label="Contatar desenvolvedor no WhatsApp">
-                        <img src="logoE.webp" alt="Logo do Desenvolvido" class="h-6 w-auto">
+                        <img src="logoE.webp" alt="Logo do Desenvolvedor" class="h-6 w-auto">
                     </a>
                 </div>
             </div>
@@ -609,7 +709,7 @@
                     <i data-lucide="facebook" class="w-5 h-5"></i>
                     <span>Facebook</span>
                 </a>
-                <a href="https://www.google.com/maps/place/Premium+Contabilidade+e+Assessoria+Empresarial+-+Escrit%C3%Bório+de+Contabilidade,+Abertura+e+Regulariza%C3%A7%C3%A3o+de+Empresas/@-15.798662,-47.886715,16z/data=!4m6!3m5!1s0x935a3ab54cd40001:0xbea273a12f0bb2d2!8m2!3d-15.7986617!4d-47.8867151!16s%2Fg%2F11cn3g_5t3?hl=pt-BR&entry=ttu&g_ep=EgoyMDI1MTAxNS4wIKXMDSoASAFQAw%DD" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-white transition-colors">
+                <a href="https://www.google.com/maps/place/Premium+Contabilidade+e+Assessoria+Empresarial+-+Escrit%C3%Bório+de+Contabilidade,+Abertura+e+Regulariza%C3%A7%C3%A3o+de+Empresas/@-15.798662,-47.886715,16z/data=!4m6!3m5!1s0x935a3ab54cd40001:0xbea273a12f0bb2d2!8m2!3d-15.7986617!4d-47.8867151!16s%2Fg%2F11cn3g_5t3?hl=pt-BR&entry=ttu&g_ep=EgoyMDI1MTAxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-white transition-colors">
                     <i data-lucide="globe" class="w-5 h-5"></i>
                     <span>Google</span>
                 </a>
@@ -618,7 +718,7 @@
     </footer>
 
     <!-- Botão Flutuante do WhatsApp -->
-    <a href="https://wa.me/556132444605?text=Ol%C3%A1!+Gostaria+de+mais+informações+sobre+os+serviços+contábeis+que+vocês+oferecem." target="_blank" rel="noopener noreferrer" aria-label="Fale conosco no WhatsApp" class="fixed bottom-6 right-6 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all transform hover:scale-110 z-50 flex items-center justify-center">
+    <a href="https://wa.me/556132444605?text=Ol%C3%A1,+encontrei+vocês+pelo+Site.+Podem+me+ajudar?+" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco no WhatsApp" class="fixed bottom-6 right-6 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all transform hover:scale-110 z-[9999] flex items-center justify-center">
         <svg viewBox="0 0 24 24" class="w-8 h-8" fill="currentColor">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01s-.521.074-.792.372c-.272.296-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
@@ -652,7 +752,7 @@
             const icon = header.querySelector('i');
 
             header.addEventListener('click', () => {
-                // Fechar outros itens abertos
+                // Close other open items
                 accordionItems.forEach(otherItem => {
                     if (otherItem !== item) {
                         const otherContent = otherItem.querySelector('.accordion-content');
@@ -662,7 +762,7 @@
                     }
                 });
                 
-                // Abrir/Fechar item atual
+                // Toggle current item
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
                     if(icon) icon.style.transform = 'rotate(0deg)';
@@ -688,77 +788,81 @@
         fadeInElements.forEach(el => {
             observer.observe(el);
         });
+
+        // Staggered hero animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroElements = document.querySelectorAll('.hero-animation');
+            heroElements.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 150}ms`;
+                el.classList.add('visible');
+            });
+        });
         
         // Dynamic padding for fixed header
         const header = document.getElementById('header');
         const mainContent = document.querySelector('main');
         function setMainPadding() {
             if (header && mainContent) {
-                mainContent.style.paddingTop = `${header.offsetHeight}px`;
+                const headerHeight = header.offsetHeight;
+                mainContent.style.paddingTop = `${headerHeight}px`;
             }
         }
         
         window.addEventListener('load', setMainPadding);
         window.addEventListener('resize', setMainPadding);
 
-        // Testimonial Carousel
+        // Testimonial Carousel with Autoplay
         const testimonialTrack = document.getElementById('testimonial-track');
         if (testimonialTrack) {
             const prevTestimonialBtn = document.getElementById('prev-testimonial');
             const nextTestimonialBtn = document.getElementById('next-testimonial');
             const testimonialSlides = Array.from(testimonialTrack.children);
             let testimonialIndex = 0;
-            let autoSlideInterval; // Variável para guardar o timer
+            let autoSlideInterval;
 
             const updateTestimonialCarousel = () => {
                 testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
             };
 
-            // Função para parar o autoplay
             const stopAutoSlide = () => {
                 clearInterval(autoSlideInterval);
             };
 
-            // Função para (re)iniciar o autoplay
             const startAutoSlide = () => {
-                stopAutoSlide(); // Limpa qualquer timer anterior
+                stopAutoSlide();
                 autoSlideInterval = setInterval(() => {
-                    // Lógica para avançar para o próximo slide
                     testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
                     updateTestimonialCarousel();
-                }, 8000); // 8000ms = 8 segundos
+                }, 5000);
             };
 
             nextTestimonialBtn.addEventListener('click', () => {
                 testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
                 updateTestimonialCarousel();
-                startAutoSlide(); // Reinicia o timer ao clicar
+                startAutoSlide();
             });
 
             prevTestimonialBtn.addEventListener('click', () => {
                 testimonialIndex = (testimonialIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
                 updateTestimonialCarousel();
-                startAutoSlide(); // Reinicia o timer ao clicar
+                startAutoSlide();
             });
 
             // Swipe functionality for mobile
             let touchstartX = 0;
             testimonialTrack.addEventListener('touchstart', e => {
                 touchstartX = e.changedTouches[0].screenX;
-                stopAutoSlide(); // Pausa o timer ao tocar
+                stopAutoSlide();
             }, { passive: true });
 
             testimonialTrack.addEventListener('touchend', e => {
                 const touchendX = e.changedTouches[0].screenX;
-                // Dispara o clique, que já reinicia o timer
                 if (touchendX < touchstartX - 50) nextTestimonialBtn.click();
                 if (touchendX > touchstartX + 50) prevTestimonialBtn.click();
-                
-                // Reinicia o timer mesmo se o swipe não for completo
                 startAutoSlide();
             }, { passive: true });
 
-            startAutoSlide(); // Inicia o autoplay quando a página carrega
+            startAutoSlide();
         }
 
         // Logo Carousel for Mobile
@@ -772,7 +876,7 @@
                 
                 const logosPerSlide = 3;
                 const numSlides = Math.ceil(logos.length / logosPerSlide);
-                logoTrack.innerHTML = ''; // Limpar conteúdo existente
+                logoTrack.innerHTML = ''; 
 
                 for (let i = 0; i < numSlides; i++) {
                     const slide = document.createElement('div');
@@ -791,7 +895,7 @@
                 }
 
                 const logoSlides = Array.from(logoTrack.children);
-                if (logoSlides.length <= 1) return; // Não precisa de carrossel se for só 1 slide
+                if (logoSlides.length <= 1) return; 
 
                 const prevLogoBtn = document.getElementById('prev-logo');
                 const nextLogoBtn = document.getElementById('next-logo');
@@ -803,11 +907,11 @@
                 };
 
                 const startAutoSlide = () => {
-                    stopAutoSlide(); // Limpa intervalo anterior
+                    stopAutoSlide(); 
                     autoSlideInterval = setInterval(() => {
                         logoIndex = (logoIndex + 1) % logoSlides.length;
                         updateLogoCarousel();
-                    }, 4000); // Muda a cada 4 segundos
+                    }, 4000); 
                 };
 
                 const stopAutoSlide = () => {
@@ -817,13 +921,13 @@
                 nextLogoBtn.addEventListener('click', () => {
                     logoIndex = (logoIndex + 1) % logoSlides.length;
                     updateLogoCarousel();
-                    startAutoSlide(); // Reinicia o timer
+                    startAutoSlide(); 
                 });
 
                 prevLogoBtn.addEventListener('click', () => {
                     logoIndex = (logoIndex - 1 + logoSlides.length) % logoSlides.length;
                     updateLogoCarousel();
-                    startAutoSlide(); // Reinicia o timer
+                    startAutoSlide(); 
                 });
 
                 // Swipe para logos
@@ -845,17 +949,130 @@
                     startAutoSlide();
                 }, { passive: true });
                 
-                startAutoSlide(); // Inicia o slide automático
+                startAutoSlide(); 
             }
         });
+
+        // ========== Gemini API Feature: Quick Check ==========
+        const diagnosticoBtn = document.getElementById('ai-submit-btn');
+        const aiQuery = document.getElementById('ai-query');
+        const aiResult = document.getElementById('ai-result');
+        const aiResponseText = document.getElementById('ai-response-text');
+        const aiLoading = document.getElementById('ai-loading');
+
+        if (diagnosticoBtn) {
+            diagnosticoBtn.addEventListener('click', handleGeminiDiagnostic);
+        }
+
+        async function handleGeminiDiagnostic() {
+            const userQuery = aiQuery.value;
+            if (!userQuery) {
+                alert("Por favor, descreva sua dúvida ou desafio.");
+                return;
+            }
+
+            showLoading(true);
+            aiResult.classList.add('hidden');
+
+            // NOTE: In a real production app, never expose your API key in client-side code.
+            // Use a backend proxy instead. For this demo/environment, we use it directly.
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const systemPrompt = `Você é um consultor contábil sênior da Premium Contabilidade, um escritório renomado em Brasília.
+Seu objetivo é ajudar potenciais clientes (leads) com dúvidas iniciais.
+Com base na descrição do usuário:
+1.  Demonstre empatia e profissionalismo.
+2.  Identifique os principais pontos de atenção contábil/fiscal/legal.
+3.  Sugira qual dos nossos serviços (Gestão Contábil, Fiscal, Pessoal, Legalização, Auditoria) pode ajudar.
+4.  Seja conciso (máximo 3 parágrafos curtos).
+5.  Use formatação Markdown (negrito, listas) para facilitar a leitura.
+6.  IMPORTANTE: Termine sempre incentivando o agendamento de um diagnóstico completo com um humano.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            // Implement retry logic with exponential backoff
+            let response;
+            let retries = 3;
+            let delay = 1000;
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        break;
+                    } else if (response.status === 429 || response.status >= 500) {
+                        if (i === retries - 1) throw new Error(`HTTP error! status: ${response.status}`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2;
+                    } else {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                } catch (error) {
+                    if (i === retries - 1) {
+                        console.error("Gemini API Error:", error);
+                        alert("Ocorreu um erro ao conectar com o consultor virtual. Por favor, tente novamente.");
+                        showLoading(false);
+                        return;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+            
+            try {
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const text = candidate.content.parts[0].text;
+                    showResult(text);
+                } else {
+                    alert("Não foi possível gerar uma resposta. Tente novamente.");
+                }
+
+            } catch (error) {
+                console.error("Error parsing response:", error);
+                alert("Erro ao processar a resposta. Tente novamente.");
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function showLoading(isLoading) {
+            if (isLoading) {
+                aiLoading.classList.remove('hidden');
+                diagnosticoBtn.disabled = true;
+                diagnosticoBtn.classList.add('opacity-70', 'cursor-not-allowed');
+            } else {
+                aiLoading.classList.add('hidden');
+                diagnosticoBtn.disabled = false;
+                diagnosticoBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+        }
+
+        function showResult(text) {
+            // Simple markdown to HTML conversion for basic formatting
+            let formattedText = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                .replace(/^\* (.*$)/gm, '<ul><li>$1</li></ul>') // Lists
+                .replace(/<\/ul>\s*<ul>/g, '') // Merge lists
+                .replace(/\n/g, '<br>'); // Line breaks
+
+            aiResponseText.innerHTML = formattedText;
+            aiResult.classList.remove('hidden');
+        }
 
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
