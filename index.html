@@ -456,11 +456,11 @@
                     <p class="fade-in mt-4 text-lg text-slate-600 max-w-3xl mx-auto">Combinamos experiência, tecnologia e um atendimento dedicado para ser o parceiro contábil que sua empresa merece.</p>
                 </div>
                 
-                <!-- Layout 2 colunas: Texto/Cards na esquerda, Vídeo na direita -->
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Layout 3 colunas: Cards Esq, Vídeo Centro, Cards Dir -->
+                <div class="grid lg:grid-cols-3 gap-8 items-center">
                     
-                    <!-- Coluna Esquerda: Cards de Benefícios -->
-                    <div class="grid sm:grid-cols-2 gap-8">
+                    <!-- Coluna Esquerda: 2 Cards -->
+                    <div class="flex flex-col gap-6">
                         <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all">
                             <div class="flex justify-center items-center mb-4">
                                <i data-lucide="briefcase" class="w-10 h-10 text-accent"></i>
@@ -475,14 +475,29 @@
                             <h3 class="font-bold text-xl mb-2">Atendimento Personalizado</h3>
                             <p class="text-slate-600">Foco total nas necessidades e objetivos estratégicos de cada cliente.</p>
                         </div>
-                        <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all" style="animation-delay: 0.4s;">
+                    </div>
+
+                    <!-- Coluna Central: Vídeo Vertical -->
+                    <!-- order-first no mobile para o vídeo aparecer antes dos cards -->
+                    <div class="fade-in flex justify-center items-center order-first lg:order-none mb-8 lg:mb-0" style="animation-delay: 0.4s;">
+                        <div class="aspect-[9/16] w-full max-w-xs rounded-2xl shadow-2xl overflow-hidden bg-slate-200">
+                             <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+                                <source src="video2.mp4" type="video/mp4">
+                                Seu navegador não suporta a tag de vídeo.
+                            </video>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita: 2 Cards -->
+                    <div class="flex flex-col gap-6">
+                        <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all" style="animation-delay: 0.6s;">
                              <div class="flex justify-center items-center mb-4">
                                <i data-lucide="cloud" class="w-10 h-10 text-accent"></i>
                             </div>
                             <h3 class="font-bold text-xl mb-2">Ambiente Digital</h3>
                             <p class="text-slate-600">Utilizamos as melhores tecnologias para processos ágeis e 100% seguros.</p>
                         </div>
-                        <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all" style="animation-delay: 0.6s;">
+                        <div class="fade-in p-6 text-center bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-md transition-all" style="animation-delay: 0.8s;">
                              <div class="flex justify-center items-center mb-4">
                                <i data-lucide="building" class="w-10 h-10 text-accent"></i>
                             </div>
@@ -491,26 +506,11 @@
                         </div>
                     </div>
 
-                    <!-- Coluna Direita: Vídeo Vertical -->
-                    <div class="fade-in flex justify-center items-center" style="animation-delay: 0.8s;">
-                        <div class="aspect-[9/16] w-full max-w-sm rounded-2xl shadow-2xl overflow-hidden bg-slate-200">
-                             <video class="w-full h-full object-cover" autoplay loop muted playsinline>
-                                <source src="video2.mp4" type="video/mp4">
-                                Seu navegador não suporta a tag de vídeo.
-                            </video>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- ========== 6. FAQ Section ========== -->
-        <section id="faq" class="pt-14 lg:pt-24 pb-5 lg:pb-8">
-            <div class="container mx-auto px-6">
-                <div class="max-w-4xl mx-auto">
-                    <div class="text-center mb-16">
-                        <h2 class="fade-in text-4xl lg:text-5xl font-extrabold text-slate-900">Perguntas Frequentes</h2>
+        <!-- ========== NEW Gemini AI Consultant Section ========== -->
                     </div>
                     <div class="fade-in space-y-4">
                         <!-- FAQ Item 1 -->
