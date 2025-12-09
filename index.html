@@ -536,6 +536,66 @@
             </div>
         </section>
 
+        <!-- ========== NEW Gemini AI Consultant Section ========== -->
+        <section id="ai-consultant" class="pt-14 pb-12 lg:pt-24 lg:pb-20 bg-[#F2F9FE]">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center p-3 bg-white rounded-full shadow-sm mb-6">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                    <h2 class="fade-in text-4xl lg:text-5xl font-extrabold text-slate-900">Consultor Inteligente Premium</h2>
+                    <p class="fade-in mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                        Tire suas dúvidas ou descreva seu desafio contábil. Nossa inteligência artificial, treinada com a expertise da Premium, dará uma orientação inicial.
+                    </p>
+                </div>
+
+                <div class="fade-in bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                    <div class="space-y-4">
+                        <label for="ai-query" class="block text-sm font-medium text-slate-700 mb-1">Como podemos ajudar sua empresa hoje?</label>
+                        <textarea 
+                            id="ai-query" 
+                            rows="4" 
+                            class="w-full p-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent transition-all outline-none resize-none"
+                            placeholder="Ex: Quero abrir uma empresa de TI em Brasília, quais são os primeiros passos? ou Como pagar menos impostos sendo médico?"
+                        ></textarea>
+                        
+                        <button 
+                            id="ai-submit-btn" 
+                            class="w-full bg-accent text-white font-bold py-4 rounded-xl hover:bg-accent-dark transition-all shadow-lg hover:shadow-accent/20 flex items-center justify-center gap-2 group"
+                        >
+                            <span>Obter Orientação</span>
+                            <i data-lucide="sparkles" class="w-5 h-5 group-hover:animate-pulse"></i>
+                        </button>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="ai-loading" class="hidden mt-8 text-center">
+                        <div class="inline-block loader mb-2"></div>
+                        <p class="text-slate-500 text-sm">Analisando sua solicitação...</p>
+                    </div>
+
+                    <!-- Result Area -->
+                    <div id="ai-result" class="hidden mt-8 p-6 bg-slate-50 rounded-xl border border-slate-200 animate-fade-in">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 bg-accent/10 p-2 rounded-lg">
+                                <i data-lucide="bot" class="w-6 h-6 text-accent"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-slate-900 mb-2">Resposta do Consultor Virtual:</h4>
+                                <div id="ai-response-text" class="text-slate-700 leading-relaxed markdown-body"></div>
+                                <div class="mt-4 pt-4 border-t border-slate-200">
+                                    <p class="text-sm text-slate-500 italic">
+                                        *Esta é uma orientação preliminar gerada por IA. Para uma análise completa e segura, 
+                                        <a href="https://wa.me/556132444605?text=Ol%C3%A1,+gostaria+de+continuar+o+atendimento+iniciado+pelo+Consultor+Virtual." target="_blank" class="text-accent font-semibold hover:underline">fale com um de nossos especialistas humanos.</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ========== 6. FAQ Section ========== -->
         <section id="faq" class="pt-14 lg:pt-24 pb-5 lg:pb-8">
             <div class="container mx-auto px-6">
@@ -736,13 +796,23 @@
         fadeInElements.forEach(el => {
             observer.observe(el);
         });
+
+        // Staggered hero animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroElements = document.querySelectorAll('.hero-animation');
+            heroElements.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 150}ms`;
+                el.classList.add('visible');
+            });
+        });
         
         // Dynamic padding for fixed header
         const header = document.getElementById('header');
         const mainContent = document.querySelector('main');
         function setMainPadding() {
             if (header && mainContent) {
-                mainContent.style.paddingTop = `${header.offsetHeight}px`;
+                const headerHeight = header.offsetHeight;
+                mainContent.style.paddingTop = `${headerHeight}px`;
             }
         }
         
@@ -890,6 +960,126 @@
                 startAutoSlide(); 
             }
         });
+
+        // ========== Gemini API Feature: Quick Check ==========
+        const diagnosticoBtn = document.getElementById('ai-submit-btn');
+        const aiQuery = document.getElementById('ai-query');
+        const aiResult = document.getElementById('ai-result');
+        const aiResponseText = document.getElementById('ai-response-text');
+        const aiLoading = document.getElementById('ai-loading');
+
+        if (diagnosticoBtn) {
+            diagnosticoBtn.addEventListener('click', handleGeminiDiagnostic);
+        }
+
+        async function handleGeminiDiagnostic() {
+            const userQuery = aiQuery.value;
+            if (!userQuery) {
+                alert("Por favor, descreva sua dúvida ou desafio.");
+                return;
+            }
+
+            showLoading(true);
+            aiResult.classList.add('hidden');
+
+            // NOTE: In a real production app, never expose your API key in client-side code.
+            // Use a backend proxy instead. For this demo/environment, we use it directly.
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const systemPrompt = `Você é um consultor contábil sênior da Premium Contabilidade, um escritório renomado em Brasília.
+Seu objetivo é ajudar potenciais clientes (leads) com dúvidas iniciais.
+Com base na descrição do usuário:
+1.  Demonstre empatia e profissionalismo.
+2.  Identifique os principais pontos de atenção contábil/fiscal/legal.
+3.  Sugira qual dos nossos serviços (Gestão Contábil, Fiscal, Pessoal, Legalização, Auditoria) pode ajudar.
+4.  Seja conciso (máximo 3 parágrafos curtos).
+5.  Use formatação Markdown (negrito, listas) para facilitar a leitura.
+6.  IMPORTANTE: Termine sempre incentivando o agendamento de um diagnóstico completo com um humano.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            // Implement retry logic with exponential backoff
+            let response;
+            let retries = 3;
+            let delay = 1000;
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        break;
+                    } else if (response.status === 429 || response.status >= 500) {
+                        if (i === retries - 1) throw new Error(`HTTP error! status: ${response.status}`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2;
+                    } else {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                } catch (error) {
+                    if (i === retries - 1) {
+                        console.error("Gemini API Error:", error);
+                        alert("Ocorreu um erro ao conectar com o consultor virtual. Por favor, tente novamente.");
+                        showLoading(false);
+                        return;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+            
+            try {
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const text = candidate.content.parts[0].text;
+                    showResult(text);
+                } else {
+                    alert("Não foi possível gerar uma resposta. Tente novamente.");
+                }
+
+            } catch (error) {
+                console.error("Error parsing response:", error);
+                alert("Erro ao processar a resposta. Tente novamente.");
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function showLoading(isLoading) {
+            if (isLoading) {
+                aiLoading.classList.remove('hidden');
+                diagnosticoBtn.disabled = true;
+                diagnosticoBtn.classList.add('opacity-70', 'cursor-not-allowed');
+            } else {
+                aiLoading.classList.add('hidden');
+                diagnosticoBtn.disabled = false;
+                diagnosticoBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+        }
+
+        function showResult(text) {
+            // Simple markdown to HTML conversion for basic formatting
+            let formattedText = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                .replace(/^\* (.*$)/gm, '<ul><li>$1</li></ul>') // Lists
+                .replace(/<\/ul>\s*<ul>/g, '') // Merge lists
+                .replace(/\n/g, '<br>'); // Line breaks
+
+            aiResponseText.innerHTML = formattedText;
+            aiResult.classList.remove('hidden');
+        }
 
     </script>
 </body>
