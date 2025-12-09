@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Contabilidade - Escritório de Contabilidade em Brasília, DF</title>
+    <title>Premium Contabilidade e Assessoria Empresarial em Brasília</title>
 
     <!-- Metatags de SEO -->
     <meta name="description" content="A Premium Contabilidade oferece soluções completas em gestão contábil, fiscal e de pessoal. Transforme a gestão da sua empresa com nosso time de especialistas.">
-    <meta name="keywords" content="contabilidade, escritório de contabilidade, gestão fiscal, departamento pessoal, abertura de empresa, auditoria">
+    <meta name="keywords" content="contabilidade, escritório de contabilidade, assessoria empresarial, gestão fiscal, assessoria fiscal, gestão tributária, departamento pessoal, abertura de empresa, auditoria, auditoria empresarial independente">
     
     <!-- Open Graph (para redes sociais) -->
     <meta property="og:type" content="website">
@@ -179,6 +179,7 @@
                     <a href="#testimonials" class="text-slate-600 hover:text-accent transition-colors">Depoimentos</a>
                     <a href="#services" class="text-slate-600 hover:text-accent transition-colors">Serviços</a>
                     <a href="#why-choose" class="text-slate-600 hover:text-accent transition-colors">Porque nós?</a>
+                    <a href="#ai-consultant" class="text-slate-600 hover:text-accent transition-colors flex items-center gap-1"><i data-lucide="sparkles" class="w-4 h-4"></i>Consultor IA</a>
                     <a href="#faq" class="text-slate-600 hover:text-accent transition-colors">FAQ</a>
                 </nav>
                 <div class="flex items-center space-x-4">
@@ -198,6 +199,7 @@
             <a href="#testimonials" class="block py-2 text-slate-600 hover:text-accent">Depoimentos</a>
             <a href="#services" class="block py-2 text-slate-600 hover:text-accent">Serviços</a>
             <a href="#why-choose" class="block py-2 text-slate-600 hover:text-accent">Porque nós?</a>
+            <a href="#ai-consultant" class="block py-2 text-slate-600 hover:text-accent flex items-center gap-2"><i data-lucide="sparkles" class="w-4 h-4"></i>Consultor IA</a>
             <a href="#faq" class="block py-2 text-slate-600 hover:text-accent">FAQ</a>
             <a href="https://wa.me/556132444605?text=Ol%C3%A1,+encontrei+vocês+pelo+Site.+Podem+me+ajudar?+" target="_blank" rel="noopener noreferrer" class="block mt-4 w-full text-center bg-accent text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-accent-dark transition-all">Falar com Especialista</a>
         </div>
@@ -796,15 +798,6 @@
         fadeInElements.forEach(el => {
             observer.observe(el);
         });
-
-        // Staggered hero animation on load
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroElements = document.querySelectorAll('.hero-animation');
-            heroElements.forEach((el, index) => {
-                el.style.transitionDelay = `${index * 150}ms`;
-                el.classList.add('visible');
-            });
-        });
         
         // Dynamic padding for fixed header
         const header = document.getElementById('header');
@@ -984,7 +977,7 @@
 
             // NOTE: In a real production app, never expose your API key in client-side code.
             // Use a backend proxy instead. For this demo/environment, we use it directly.
-            const apiKey = ""; 
+            const apiKey = "AIzaSyBbnpEdwGrGsscNUC-xqnExlws4bkqkxvo"; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             
             const systemPrompt = `Você é um consultor contábil sênior da Premium Contabilidade, um escritório renomado em Brasília.
