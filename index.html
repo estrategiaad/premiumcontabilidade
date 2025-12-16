@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Contabilidade e Assessoria Empresarial em Brasília</title>
+    <title>Premium Contabilidade - Escritório de Contabilidade em Brasília, DF</title>
 
     <!-- Favicon (Ícone da Aba) -->
     <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Metatags de SEO -->
     <meta name="description" content="A Premium Contabilidade oferece soluções completas em gestão contábil, fiscal e de pessoal. Transforme a gestão da sua empresa com nosso time de especialistas.">
-    <meta name="keywords" content="contabilidade, escritório de contabilidade, assessoria empresarial, gestão fiscal, assessoria fiscal, gestão tributária, departamento pessoal, abertura de empresa, auditoria, auditoria empresarial independente">
+    <meta name="keywords" content="contabilidade, escritório de contabilidade, gestão fiscal, departamento pessoal, abertura de empresa, auditoria">
     
     <!-- Open Graph (para redes sociais) -->
     <meta property="og:type" content="website">
@@ -333,9 +333,9 @@
                                 <!-- Testimonial 4 -->
                                 <div class="w-full bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
                                     <div class="flex items-center mb-4">
-                                        <img loading="lazy" src="https://placehold.co/48x48/26a69a/ffffff?text=AD" alt="Avatar de Alice Domingues" class="w-12 h-12 rounded-full mr-4">
+                                        <img loading="lazy" src="https://placehold.co/48x48/26a69a/ffffff?text=AD" alt="Avatar de Alinne Domingues" class="w-12 h-12 rounded-full mr-4">
                                         <div>
-                                            <h4 class="font-bold">Alice Domingues</h4>
+                                            <h4 class="font-bold">Alinne Domingues</h4>
                                             <div class="flex text-yellow-400">
                                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
                                             </div>
@@ -550,13 +550,14 @@
                     </div>
                     <h2 class="fade-in text-4xl lg:text-5xl font-extrabold text-slate-900">Consultor Inteligente Premium</h2>
                     <p class="fade-in mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
-                        Tire suas dúvidas ou descreva seu desafio contábil. Nossa inteligência artificial, treinada com a expertise da Premium, dará uma orientação inicial.
+                        Precisa abrir empresa, reduzir impostos ou regularizar seu CNPJ?<br>
+                        Descreva sua dúvida e receba uma orientação inicial imediata, baseada nos 24 anos de experiência da Premium Contabilidade. Ajudamos você a entender o melhor caminho — com clareza, segurança e estratégia.
                     </p>
                 </div>
 
                 <div class="fade-in bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
                     <div class="space-y-4">
-                        <label for="ai-query" class="block text-sm font-medium text-slate-700 mb-1">Como podemos ajudar sua empresa hoje?</label>
+                        <label for="ai-query" class="block text-sm font-medium text-slate-700 mb-1">Conte sua dúvida ou necessidade e mostraremos qual é o melhor caminho para a sua empresa.</label>
                         <textarea 
                             id="ai-query" 
                             rows="4" 
@@ -571,6 +572,11 @@
                             <span>Obter Orientação</span>
                             <i data-lucide="sparkles" class="w-5 h-5 group-hover:animate-pulse"></i>
                         </button>
+                        
+                        <!-- Error Message Container (Substitui o alert) -->
+                        <div id="ai-error-message" class="hidden p-4 mt-2 text-sm text-red-700 bg-red-100 border border-red-200 rounded-lg" role="alert">
+                            <span class="font-bold">Atenção:</span> <span id="ai-error-text"></span>
+                        </div>
                     </div>
 
                     <!-- Loading State -->
@@ -801,6 +807,15 @@
         fadeInElements.forEach(el => {
             observer.observe(el);
         });
+
+        // Staggered hero animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroElements = document.querySelectorAll('.hero-animation');
+            heroElements.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 150}ms`;
+                el.classList.add('visible');
+            });
+        });
         
         // Dynamic padding for fixed header
         const header = document.getElementById('header');
@@ -963,6 +978,8 @@
         const aiResult = document.getElementById('ai-result');
         const aiResponseText = document.getElementById('ai-response-text');
         const aiLoading = document.getElementById('ai-loading');
+        const aiErrorMessage = document.getElementById('ai-error-message');
+        const aiErrorText = document.getElementById('ai-error-text');
 
         if (diagnosticoBtn) {
             diagnosticoBtn.addEventListener('click', handleGeminiDiagnostic);
@@ -970,8 +987,13 @@
 
         async function handleGeminiDiagnostic() {
             const userQuery = aiQuery.value;
+            
+            // Hide previous error
+            aiErrorMessage.classList.add('hidden');
+            
             if (!userQuery) {
-                alert("Por favor, descreva sua dúvida ou desafio.");
+                aiErrorText.textContent = "Por favor, descreva sua dúvida ou desafio.";
+                aiErrorMessage.classList.remove('hidden');
                 return;
             }
 
@@ -1025,7 +1047,8 @@ Com base na descrição do usuário:
                 } catch (error) {
                     if (i === retries - 1) {
                         console.error("Gemini API Error:", error);
-                        alert("Ocorreu um erro ao conectar com o consultor virtual. Por favor, tente novamente.");
+                        aiErrorText.textContent = "Ocorreu um erro ao conectar com o consultor virtual. Por favor, tente novamente.";
+                        aiErrorMessage.classList.remove('hidden');
                         showLoading(false);
                         return;
                     }
@@ -1042,12 +1065,14 @@ Com base na descrição do usuário:
                     const text = candidate.content.parts[0].text;
                     showResult(text);
                 } else {
-                    alert("Não foi possível gerar uma resposta. Tente novamente.");
+                     aiErrorText.textContent = "Não foi possível gerar uma resposta. Tente novamente.";
+                     aiErrorMessage.classList.remove('hidden');
                 }
 
             } catch (error) {
                 console.error("Error parsing response:", error);
-                alert("Erro ao processar a resposta. Tente novamente.");
+                aiErrorText.textContent = "Erro ao processar a resposta. Tente novamente.";
+                aiErrorMessage.classList.remove('hidden');
             } finally {
                 showLoading(false);
             }
